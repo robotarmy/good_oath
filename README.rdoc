@@ -1,6 +1,6 @@
 = good_oath
 
-Description goes here.
+Reference Ruby implementation and External API test client
 
 == Note on Patches/Pull Requests
  
