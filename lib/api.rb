@@ -8,9 +8,22 @@ class Api
     response = Nokogiri(go.access_token.post("/user_status.xml?user_status[body]=#{CGI.escape(body)}&user_status[page]=#{CGI.escape(page)}").body).search('user-status body').first.text
     body == response
   end
-  def search_reviews(query)
-    Nokogiri(go.access_token.get("/review/list?format=xml&v=2&search[query]=#{CGI.escape(query)}").body).search('book')
+
+  def search_params(opts)
+    query_param = ''
+    shelf_param = ''
+    query = opts[:query]
+    query_param = "&search[query]=#{CGI.escape(query)}" if query
+    shelf = opts[:shelf]
+    shelf_param = "&shelf=#{CGI.escape(shelf)}" if shelf
+     "#{query_param}#{shelf_param}"
   end
+
+  def search_reviews(opts)
+    params = search_params(opts)
+    Nokogiri(go.access_token.get("/review/list?format=xml&v=2#{params.to_s}").body).search('book')
+  end
+
   def user_id
     Nokogiri(go.access_token.get('/api/auth_user').body).search('user').attr('id').value
   end
