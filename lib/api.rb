@@ -13,15 +13,17 @@ class Api
     query_param = ''
     shelf_param = ''
     query = opts[:query]
-    query_param = "&search[query]=#{CGI.escape(query)}" if query
+    query_param = "&search[query]=#{CGI.escape(query)}" unless query.to_s.empty?
     shelf = opts[:shelf]
-    shelf_param = "&shelf=#{CGI.escape(shelf)}" if shelf
-     "#{query_param}#{shelf_param}"
+    shelf_param = "&shelf=#{CGI.escape(shelf)}" unless shelf.to_s.empty?
+
+    p i = "#{query_param}#{shelf_param}"
+    i
   end
 
   def search_reviews(opts)
     params = search_params(opts)
-    Nokogiri(go.access_token.get("/review/list?format=xml&v=2#{params.to_s}").body).search('book')
+    Nokogiri(go.access_token.get("/review/list.xml?v=2#{params.to_s}").body).search('book')
   end
 
   def user_id

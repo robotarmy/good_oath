@@ -11,14 +11,20 @@ class GoodOath
   end
 
   def initialize
+    #production
     self.key    = 'xw3bw5rFUFr8LSuBqOdC2w'
     self.secret = 'qOKAqYJPZiC3iOdifigKFSxEd2vLGAiEqmVMxFSQ'
+    self.hostname = 'http://www.goodreads.com/'
+    #development
+    #self.key= 'RdigIYnGLMUVpzGa1IZVYw'
+    #self.secret= 'JkaSe9jC2zpBZbgXfWZOpW59eFQNLgPMavizi59w'
+    #self.hostname = 'http://localhost:3000'
   end
-  attr_accessor :key,:secret,:user_token
+  attr_accessor :key,:secret,:user_token,:hostname
 
   def register_user(user)
     if !stored_user?(user)
-      consumer=OAuth::Consumer.new(key,secret,{:site=>"http://www.goodreads.com"})
+      consumer=OAuth::Consumer.new(key,secret,{:site=>self.hostname})
       user_token = UserToken.new 
       user_token.user = user
       user_token.request_token = consumer.get_request_token
