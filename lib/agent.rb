@@ -12,7 +12,7 @@ class Agent
           form['user[email]'] = user
           form['user[password]'] = password
         end.click_button
-        page = auth_page.form_with(:action => 'http://www.goodreads.com/oauth/authorize') do |form|
+        page = auth_page.form_with(:action => "#{go.hostname}/oauth/authorize") do |form|
           form['authorize'] = 1
         end.click_button
       end

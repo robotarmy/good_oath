@@ -17,7 +17,7 @@ describe 'API' do
     @goat.load_user('bob.fake.4@robotarmyma.de')
 
     api = Api.new(@goat)
-    api.search_reviews(:query =>'dune', :shelf => 'oeuaou').collect {|e| e.text.downcase}.join.should match 'dune'
+    api.search_reviews(:query =>'dune').size.should == 1
   end
   it "can create a user status" do
     @goat = GoodOath.new
