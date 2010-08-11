@@ -14,7 +14,7 @@ class GoodOath
     #production
     self.key    = 'xw3bw5rFUFr8LSuBqOdC2w'
     self.secret = 'qOKAqYJPZiC3iOdifigKFSxEd2vLGAiEqmVMxFSQ'
-    self.hostname = 'http://www.goodreads.com/'
+    self.hostname = 'http://www.goodreads.com'
     #development
     #self.key= 'RdigIYnGLMUVpzGa1IZVYw'
     #self.secret= 'JkaSe9jC2zpBZbgXfWZOpW59eFQNLgPMavizi59w'
