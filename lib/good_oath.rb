@@ -4,6 +4,8 @@ require 'open-uri'
 require 'mechanize'
 require 'fileutils'
 require "pstore"
+require 'pit'
+MULTIPLE_REQUEST_TOKEN_BUG=false
 
 class GoodOath
   class UserToken
@@ -11,19 +13,21 @@ class GoodOath
   end
 
   def initialize
-    #production
-    self.key    = 'xw3bw5rFUFr8LSuBqOdC2w'
-    self.secret = 'qOKAqYJPZiC3iOdifigKFSxEd2vLGAiEqmVMxFSQ'
-    self.hostname = 'http://www.goodreads.com'
-    #development
-    #self.key= 'RdigIYnGLMUVpzGa1IZVYw'
-    #self.secret= 'JkaSe9jC2zpBZbgXfWZOpW59eFQNLgPMavizi59w'
-    #self.hostname = 'http://localhost:3000'
+    config = Pit.get("goodreads.settings", :require => {
+           "key" => "your api key",
+           "secret" => "your api secret",
+           "hostname" => "http://www.goodreads.com"
+    })
+    
+    self.key      = config['key']
+    self.secret   = config['secret']
+    self.hostname = config['hostname']
   end
+
   attr_accessor :key,:secret,:user_token,:hostname
 
   def register_user(user)
-    if !stored_user?(user)
+    if !stored_user?(user) || MULTIPLE_REQUEST_TOKEN_BUG
       consumer=OAuth::Consumer.new(key,secret,{:site=>self.hostname})
       user_token = UserToken.new 
       user_token.user = user
@@ -66,6 +70,7 @@ class GoodOath
     @user_token.access_token
   end
   def authorized?(user)
+    return false if MULTIPLE_REQUEST_TOKEN_BUG
     if @user_token && 
       @user_token.user == user &&
       @user_token.access_token
@@ -84,6 +89,6 @@ class GoodOath
     @user_token.request_token 
   end
   def goat
-    @goat ||= PStore.new('goat.pstore')
+    @goat ||= PStore.new(Pit.config['profile']+'.goat.pstore')
   end
 end

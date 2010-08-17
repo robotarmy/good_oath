@@ -23,7 +23,8 @@ class Api
 
   def search_reviews(opts)
     params = search_params(opts)
-    Nokogiri(go.access_token.get("/review/list.xml?v=2#{params.to_s}").body).search('book')
+    #Nokogiri(go.access_token.get("/review/list.xml?v=2#{params.to_s}").body).search('book') # not supported at moment
+    Nokogiri(go.access_token.get("/review/list?format=xml&v=2#{params.to_s}").body).search('book')
   end
 
   def user_id

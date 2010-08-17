@@ -7,6 +7,7 @@ class Agent
     if !go.authorized?(user)
       agent = Mechanize.new do |agent|
       end
+      p go.authorize_url
       agent.get(go.authorize_url) do |page|
         auth_page = page.form_with(:name => 'sign_in') do |form|
           form['user[email]'] = user
