@@ -1,0 +1,6 @@
+{"bob.fake.4@robotarmyma.deo:GoodOath::UserToken:
+@user"bob.fake.4@robotarmyma.de:@access_tokeno:OAuth::AccessToken	:@secret".0eAbopqdQ0E6H9OyDbXaFT0Zw9UlFhMMsdHyw88hc:@consumerU:OAuth::Consumer{:secret"-qOKAqYJPZiC3iOdifigKFSxEd2vLGAiEqmVMxFSQ:options{:scheme:header:http_method:	post:request_token_path"/oauth/request_token:	site"http://www.goodreads.com:authorize_path"/oauth/authorize:
+proxy0:oauth_version"1.0:signature_method"HMAC-SHA1:access_token_path"/oauth/access_token:key"xw3bw5rFUFr8LSuBqOdC2w:@params{	:oauth_token"EvuoXPYjbb6stUpM7nWdOg"oauth_token_secret@
+:oauth_token_secret@
+"oauth_token@:@token@:@request_tokeno:OAuth::RequestToken	;	"0NU2uCyUe8hiYA4ysqp3RZ8zuql70GchPDm78PlfrZNM;
+@;{	;"bjrwjZ28msyrbXhtMwQ"oauth_token_secret@;@"oauth_token@;@
