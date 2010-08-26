@@ -2,6 +2,10 @@ class Api
   def initialize(go)
     @go = go
   end
+  def get_friend_updates(opts = {})
+    Nokogiri(go.access_token.get("/updates/friends.xml").body).search('updates')
+  end
+
   def set_user_status(opts)
     body = opts[:body] 
     page = (opts[:page] ||= 0).to_s
@@ -16,9 +20,7 @@ class Api
     query_param = "&search[query]=#{CGI.escape(query)}" unless query.to_s.empty?
     shelf = opts[:shelf]
     shelf_param = "&shelf=#{CGI.escape(shelf)}" unless shelf.to_s.empty?
-
-    p i = "#{query_param}#{shelf_param}"
-    i
+    "#{query_param}#{shelf_param}"
   end
 
   def search_reviews(opts)
